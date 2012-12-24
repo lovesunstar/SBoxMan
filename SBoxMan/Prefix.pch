@@ -1,0 +1,21 @@
+//
+// Prefix header for all source files of the 'Test' target in the 'Test' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iPhone SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#ifdef DEBUG
+#define SLog(format,...) NSLog([NSString stringWithFormat:@"\n%sLine%d:\n%@",__FUNCTION__,__LINE__,format],## __VA_ARGS__)
+#define SLogRect(rect) SLog(@"%@",NSStringFromCGRect(rect))
+#else
+#define SLog(format,...)
+#define SLogRect(rect)
+#endif
+#endif
