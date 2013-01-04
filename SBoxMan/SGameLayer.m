@@ -49,40 +49,50 @@
         [self addChild:self.mapLayer z:1];
         [self.mapLayer loadMapWithLevel:[SLevelManager standardLevelManager].level];
         
+        
+        CCMenuItemImage * bkgItemImage = [CCMenuItemImage itemWithNormalImage:@"menu.png" selectedImage:@"menu.png"];
+        bkgItemImage.position = CGPointMake(0, 0);
+        CCMenu * bkgMenu = [CCMenu menuWithItems:bkgItemImage, nil];
+        bkgMenu.position = CGPointMake(winSize.width/2, winSize.height - 20);
+        [self addChild:bkgMenu z:5];
+        
+        
         self.levelItemFont = [CCMenuItemFont itemWithString:@"正在加载"];
-        self.levelItemFont.position = CGPointMake(0, 40);
+        self.levelItemFont.position = CGPointMake(40, 0);
+        self.levelItemFont.scale = 0.6f;
         self.levelItemFont.color = ccYELLOW;
         self.levelCount = [SLevelManager standardLevelManager].currentLevel;
         
         self.stepItemFont = [CCMenuItemFont itemWithString:@"正在加载"];
+        self.stepItemFont.scale = 0.6f;
         self.stepItemFont.color = ccYELLOW;
-        self.stepItemFont.position = CGPointMake(0, 0);
+        self.stepItemFont.position = CGPointMake(200, 0);
         self.stepCount = 0;
+        
         CCMenu * upperMenu = [CCMenu menuWithItems:self.levelItemFont, self.stepItemFont, nil];
-        upperMenu.position = CGPointMake(winSize.width-80, 240);
+        upperMenu.position = CGPointMake(30, winSize.height-20);
         [self addChild:upperMenu z:5 tag:1];
         
-        
-        CCMenuItemFont * resetLevelFont = [CCMenuItemFont itemWithString:@"Restart" block:^(id sender) {
-            [self.mapLayer reloadMap];
-            
-        }];
-        resetLevelFont.position = CGPointMake(0, 80);
-        
-        CCMenuItemFont * prevLevelFont = [CCMenuItemFont itemWithString:@"Previois" block:^(id sender) {
+        CCMenuItemImage * prevLevel = [CCMenuItemImage itemWithNormalImage:@"previous.png" selectedImage:@"previous.png" block:^(id sender) {
             if ([[SLevelManager standardLevelManager] hasPrevLevel]) {
                 [self.mapLayer loadMapWithLevel:[[SLevelManager standardLevelManager] prevLevel]];
                 self.levelCount = [SLevelManager standardLevelManager].currentLevel;
             }
         }];
-        prevLevelFont.position = CGPointMake(0, 40);
+        prevLevel.position = CGPointMake(0, 0);
         
-        CCMenuItemFont * nextLevelFont = [CCMenuItemFont itemWithString:@"Next" block:^(id sender) {
+        CCMenuItemImage * nextLevel = [CCMenuItemImage itemWithNormalImage:@"next.png" selectedImage:@"next.png" block:^(id sender) {
             [self nextLevel];
         }];
-        nextLevelFont.position = CGPointMake(0, 0);
-        CCMenu * menu = [CCMenu menuWithItems:resetLevelFont,prevLevelFont,nextLevelFont, nil];
-        menu.position = CGPointMake(winSize.width-80, 40);
+        nextLevel.position = CGPointMake(40, 0);
+        
+        CCMenuItemImage * resetLevel = [CCMenuItemImage itemWithNormalImage:@"reset.png" selectedImage:@"reset.png" block:^(id sender) {
+            [self.mapLayer reloadMap];
+        }];
+        resetLevel.position = CGPointMake(80, 0);
+        
+        CCMenu * menu = [CCMenu menuWithItems:prevLevel,nextLevel,resetLevel, nil];
+        menu.position = CGPointMake(winSize.width - 140, winSize.height-20);
         [self addChild:menu z:5 tag:1];
     }
     return self;
