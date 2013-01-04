@@ -44,16 +44,17 @@
         [self addChild:sprite];
         
         self.mapLayer = [SMapLayer node];
-        self.mapLayer.position = CGPointMake(20, -5);
         self.mapLayer.delegate = self;
-        [self addChild:self.mapLayer z:1];
         [self.mapLayer loadMapWithLevel:[SLevelManager standardLevelManager].level];
+        self.mapLayer.position = CGPointMake(20, -15);
+        
+        [self addChild:self.mapLayer z:1];
         
         
         CCMenuItemImage * bkgItemImage = [CCMenuItemImage itemWithNormalImage:@"menu.png" selectedImage:@"menu.png"];
         bkgItemImage.position = CGPointMake(0, 0);
         CCMenu * bkgMenu = [CCMenu menuWithItems:bkgItemImage, nil];
-        bkgMenu.position = CGPointMake(winSize.width/2, winSize.height - 20);
+        bkgMenu.position = CGPointMake(winSize.width/2, winSize.height - 15);
         [self addChild:bkgMenu z:5];
         
         
@@ -70,7 +71,7 @@
         self.stepCount = 0;
         
         CCMenu * upperMenu = [CCMenu menuWithItems:self.levelItemFont, self.stepItemFont, nil];
-        upperMenu.position = CGPointMake(30, winSize.height-20);
+        upperMenu.position = CGPointMake(30, winSize.height-15);
         [self addChild:upperMenu z:5 tag:1];
         
         CCMenuItemImage * prevLevel = [CCMenuItemImage itemWithNormalImage:@"previous.png" selectedImage:@"previous.png" block:^(id sender) {
@@ -92,7 +93,7 @@
         resetLevel.position = CGPointMake(80, 0);
         
         CCMenu * menu = [CCMenu menuWithItems:prevLevel,nextLevel,resetLevel, nil];
-        menu.position = CGPointMake(winSize.width - 140, winSize.height-20);
+        menu.position = CGPointMake(winSize.width - 140, winSize.height-15);
         [self addChild:menu z:5 tag:1];
     }
     return self;
