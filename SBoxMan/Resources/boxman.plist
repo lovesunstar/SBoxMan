@@ -18,18 +18,6 @@
 		</dict>
 		<dict>
 			<key>level</key>
-			<integer>2</integer>
-			<key>map</key>
-			<string>level_2.map</string>
-			<key>backgroundMusic</key>
-			<string>background_2.wav</string>
-			<key>pushEffect</key>
-			<string>push_box.wav</string>
-			<key>winEffect</key>
-			<string>win.wav</string>
-		</dict>
-		<dict>
-			<key>level</key>
 			<integer>3</integer>
 			<key>map</key>
 			<string>level_3.map</string>
