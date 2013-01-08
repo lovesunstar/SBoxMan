@@ -246,7 +246,7 @@
     }
     [[SimpleAudioEngine sharedEngine] preloadEffect:self.level.pushEffect];
     [[SimpleAudioEngine sharedEngine] preloadEffect:self.level.winEffect];
-    [[SimpleAudioEngine sharedEngine] playEffect:@"start.win"];
+    [[SimpleAudioEngine sharedEngine] playEffect:@"start.wav"];
     [[SimpleAudioEngine sharedEngine] playBackgroundMusic:self.level.backgroundMusic];
     
     if ([self.delegate respondsToSelector:@selector(gameDidStart)]) {

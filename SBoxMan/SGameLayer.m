@@ -114,7 +114,7 @@
 }
 
 - (void) setStepCount:(NSInteger)stepCount {
-    NSString * string = [NSString stringWithFormat:@"Step : %d",stepCount];
+    NSString * string = [NSString stringWithFormat:@"%03d",stepCount];
     [self.stepItemFont setString:string];
     _stepCount = stepCount;
 }

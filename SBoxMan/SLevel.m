@@ -33,6 +33,12 @@
         } else {
             _backgroundMusic = @"background.wav";
         }
+        if ([dictionary objectForKey:@"backgroundThumb"]) {
+            NSString * backgroundThumb = [dictionary objectForKey:@"backgroundThumb"];
+            _backgroundThumb = [backgroundThumb copy];
+        } else {
+            _backgroundThumb = @"thumb_level.png";
+        }
         if ([dictionary objectForKey:@"pushEffect"]) {
             NSString * pushEffect = [dictionary objectForKey:@"pushEffect"];
             _pushEffect = [pushEffect copy];
@@ -58,6 +64,7 @@
 
 - (void) dealloc {
     [_backgroundMusic release];
+    [_backgroundThumb release];
     [_pushEffect release];
     [_winEffect release];
     [_mapName release];

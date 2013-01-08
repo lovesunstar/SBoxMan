@@ -14,6 +14,9 @@
 /// 当前关数的数据信息
 @property (nonatomic, readonly) SLevel * level;
 
+
+@property (nonatomic, readonly) NSMutableArray * levelArray;
+
 + (SLevelManager *) standardLevelManager;
 
 /**

@@ -9,6 +9,8 @@
 
 // When you import this file, you import all the cocos2d classes
 #import "cocos2d.h"
+#import "CCScrollLayer.h"
+#import "SThumbLayer.h"
 #import "SLevelManager.h"
 
 // HelloWorldLayer

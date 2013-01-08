@@ -12,6 +12,7 @@
 @property (nonatomic, readonly) NSString * pushEffect;
 @property (nonatomic, readonly) NSString * winEffect;
 @property (nonatomic, readonly) NSInteger  level;
+@property (nonatomic, readonly) NSString * backgroundThumb;
 @property (nonatomic, readonly) NSArray * mapElements;
 
 + (id) levelWithDictionary:(NSDictionary *) dictionary;

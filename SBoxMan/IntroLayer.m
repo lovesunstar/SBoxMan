@@ -35,25 +35,38 @@
 - (id) init {
     self = [super init];
     if (self) {
+        
         CGSize winSize = [CCDirector sharedDirector].winSize;
         self.contentSize = winSize;
         
-        CCSprite * background = [CCSprite spriteWithFile:@"welcome.png"];
+        NSMutableArray * layers = [NSMutableArray arrayWithCapacity:5];
+        NSArray * levels = [SLevelManager standardLevelManager].levelArray;
+        for (SLevel * level in levels) {
+            SThumbLayer * layer = [SThumbLayer thumbLayerWithLevel:level];
+            [layers addObject:layer];
+        }
+        
+        __block CCScrollLayer * scrollLayer = [CCScrollLayer nodeWithLayers:layers layerWidth:233 widthOffset:40];
+        scrollLayer.anchorPoint = ccp(0, 0);
+        scrollLayer.position = ccp(0, 90);
+        [scrollLayer selectPage:0];
+        
+        [self addChild:scrollLayer z:5];
+        
+        CCSprite * background = [CCSprite spriteWithFile:@"background.png"];
         background.contentSize = winSize;
-        background.position = CGPointMake(winSize.width/2, winSize.height/2);
+        background.anchorPoint = ccp(0, 0);
+        background.position = CGPointMake(0, 0);
         [self addChild:background z:0 tag:1];
         
         CCMenuItemImage * startItem = [CCMenuItemImage itemWithNormalImage:@"start.png" selectedImage:@"start.png" block:^(id sender) {
+            [SLevelManager standardLevelManager].currentLevel = scrollLayer.currentScreen;
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5 scene:[SGameLayer scene] withColor:ccWHITE]];
         }];
         startItem.position = CGPointMake(0, 0);
-    
-        CCMenuItemImage * introduceItem = [CCMenuItemImage itemWithNormalImage:@"introduce.png" selectedImage:@"introduce.png" block:^(id sender) {
-            // TODO:介绍
-        }];
-        introduceItem.position = CGPointMake(190, 0);
-        CCMenu * menu = [CCMenu menuWithItems:startItem, introduceItem, nil];
-        menu.position = CGPointMake(140, 80);
+
+        CCMenu * menu = [CCMenu menuWithItems:startItem, nil];
+        menu.position = CGPointMake(240, 40);
         [self addChild:menu];
     }
     return self;

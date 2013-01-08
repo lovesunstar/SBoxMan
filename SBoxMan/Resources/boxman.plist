@@ -11,6 +11,22 @@
 			<string>level_1.map</string>
 			<key>backgroundMusic</key>
 			<string>background_1.wav</string>
+			<key>backgroundThumb</key>
+			<string>level_1_thumb.png</string>
+			<key>pushEffect</key>
+			<string>push_box.wav</string>
+			<key>winEffect</key>
+			<string>win.wav</string>
+		</dict>
+		<dict>
+			<key>level</key>
+			<integer>2</integer>
+			<key>map</key>
+			<string>level_2.map</string>
+			<key>backgroundMusic</key>
+			<string>background_2.wav</string>
+			<key>backgroundThumb</key>
+			<string>level_2_thumb.png</string>
 			<key>pushEffect</key>
 			<string>push_box.wav</string>
 			<key>winEffect</key>
@@ -23,6 +39,8 @@
 			<string>level_3.map</string>
 			<key>backgroundMusic</key>
 			<string>background_3.wav</string>
+			<key>backgroundThumb</key>
+			<string>level_3_thumb.png</string>
 			<key>pushEffect</key>
 			<string>push_box.wav</string>
 			<key>winEffect</key>
@@ -35,18 +53,8 @@
 			<string>level_4.map</string>
 			<key>backgroundMusic</key>
 			<string>background_4.wav</string>
-			<key>pushEffect</key>
-			<string>push_box.wav</string>
-			<key>winEffect</key>
-			<string>win.wav</string>
-		</dict>
-		<dict>
-			<key>level</key>
-			<integer>5</integer>
-			<key>map</key>
-			<string>level_5.map</string>
-			<key>backgroundMusic</key>
-			<string>background_5.wav</string>
+			<key>backgroundThumb</key>
+			<string>level_4_thumb.png</string>
 			<key>pushEffect</key>
 			<string>push_box.wav</string>
 			<key>winEffect</key>

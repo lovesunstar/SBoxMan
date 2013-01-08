@@ -14,4 +14,6 @@
 
 + (CCScene *) scene;
 
+@property (nonatomic, assign) NSInteger level;
+
 @end

@@ -8,12 +8,6 @@
 
 #import "SLevelManager.h"
 
-@interface SLevelManager ()
-
-@property (nonatomic, strong) NSMutableArray * levelArray;
-
-@end
-
 @implementation SLevelManager
 
 static SLevelManager * _levelManager;
@@ -30,13 +24,13 @@ static SLevelManager * _levelManager;
 - (id) init {
     self = [super init];
     if (self) {
-        self.levelArray = [NSMutableArray arrayWithCapacity:5];
+        _levelArray = [[NSMutableArray arrayWithCapacity:5] retain];
         NSString * path = [[NSBundle mainBundle] pathForResource:@"boxman" ofType:@"plist"];
         NSDictionary * dictionary = [NSDictionary dictionaryWithContentsOfFile:path];
         NSArray * levels = [dictionary objectForKey:@"Levels"];
         for (NSDictionary * dict in levels) {
             SLevel * level = [SLevel levelWithDictionary:dict];
-            [self.levelArray addObject:level];
+            [_levelArray addObject:level];
         }
         NSNumber * levelNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"level"];
         if ([levelNumber isKindOfClass:[NSNumber class]]) {
@@ -44,11 +38,21 @@ static SLevelManager * _levelManager;
         } else {
             _currentLevel = 0;
         }
-        _level = [[self.levelArray objectAtIndex:_currentLevel] retain];
+        _level = [[_levelArray objectAtIndex:_currentLevel] retain];
     }
     return self;
 }
 
+
+- (void) setCurrentLevel:(int)currentLevel {
+    if (_levelArray.count == 0) {
+        return;
+    }
+    _currentLevel = MAX(0, currentLevel);
+    _currentLevel = MIN(_levelArray.count-1, currentLevel);
+    [_level release];
+    _level = [[_levelArray objectAtIndex:_currentLevel] retain];
+}
 
 /**
  * @brief 是否存在上一关
@@ -65,7 +69,7 @@ static SLevelManager * _levelManager;
  * @return 是否存在下一关
  */
 - (BOOL) hasNextLevel {
-    return _currentLevel < self.levelArray.count -1;
+    return _currentLevel < _levelArray.count -1;
 }
 
 /**
@@ -79,8 +83,8 @@ static SLevelManager * _levelManager;
     if (prevLevel >= 0) {
         _currentLevel -= 1;
         [_level release];
-        _level = [[self.levelArray objectAtIndex:prevLevel] retain];
-        return [self.levelArray objectAtIndex:prevLevel];
+        _level = [[_levelArray objectAtIndex:prevLevel] retain];
+        return [_levelArray objectAtIndex:prevLevel];
     } else {
         SLog(@"没有上一关了~~~~");
         return nil;
@@ -98,8 +102,8 @@ static SLevelManager * _levelManager;
     if (nextLevel < self.levelArray.count) {
         _currentLevel += 1;
         [_level release];
-        _level = [[self.levelArray objectAtIndex:nextLevel] retain];
-        return [self.levelArray objectAtIndex:nextLevel];
+        _level = [[_levelArray objectAtIndex:nextLevel] retain];
+        return [_levelArray objectAtIndex:nextLevel];
     } else {
         SLog(@"没有下一关了~~~~");
         return nil;
